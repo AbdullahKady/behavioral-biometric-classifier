@@ -91,7 +91,16 @@ void trainUser(unsigned int timings[]) {
 
 void main (void) {
 
+	unsigned char i;
+
 	init();
 	trainUser(timingsA);
+	trainUser(timingsB);
+
+	for (i = 0 ; i < 9 ; i++ ) {
+		printf("UserA: %u <=> UserB : %u \n", timingsA[i], timingsB[i] );
+	}
+
+	while (1) {}
 
 }
