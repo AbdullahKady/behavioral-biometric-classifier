@@ -23,6 +23,8 @@ void init() {
 	TH1 = 0xF3; // TH1: reload value for 2400 baud @ 12MHz
 	TR1 = 1; // TR1: timer 1 run
 	TI = 1; // TI: set TI to send first char of UART
+	ET0 = 1; // Enable interrupts for T0
+	EA = 1; // Enable global interrupts
 }
 
 // Up to ~15 seconds
