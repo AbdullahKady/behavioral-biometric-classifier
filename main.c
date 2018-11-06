@@ -40,14 +40,11 @@ void stopTimer() {
 	TR0 = 0;
 }
 
-void startTimer() {
-	TR0 = 1;
-}
-
 void resetTimer() {
 	TL0 = 0x00;
 	TH0 = 0x00;
 	timer = 0;
+	TR0 = 1;
 }
 
 void trainUser(unsigned int timings[]) {
@@ -56,7 +53,6 @@ void trainUser(unsigned int timings[]) {
 	unsigned char i;
 
 	resetTimer();
-	startTimer();
 
 	while (count < 5) {
 		char c = _getkey();
@@ -70,7 +66,6 @@ void trainUser(unsigned int timings[]) {
 		}
 
 		resetTimer();
-		startTimer();
 
 		// One run of correct input password
 		if (charIndex == 9) {
