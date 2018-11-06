@@ -64,7 +64,7 @@ unsigned char* calculateTimings() {
 		resetTimer();
 
 		// One run of correct input password
-		if (charIndex == 9) {
+		if (charIndex == 10) {
 			return localTimings;
 		}
 	}
