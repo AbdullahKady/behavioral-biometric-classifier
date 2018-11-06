@@ -116,16 +116,21 @@ unsigned int calculateEculidean(unsigned int timings[]) {
 
 void main (void) {
 
-	unsigned char i;
-
 	init();
 	trainUser(timingsA);
 	trainUser(timingsB);
 
-	for (i = 0 ; i < 9 ; i++ ) {
-		printf("UserA: %u <=> UserB : %u \n", timingsA[i], timingsB[i] );
+	/*
+		* Train once, then keep looping forever, taking input and testing
+		* it against the values obtained from the training
+	*/
+	while (1) {
+		testTimings = calculateTimings();
+
+		if (calculateEculidean(timingsA) < calculateEculidean(timingsB)) {
+			printf("A");
+		} else {
+			printf("B");
+		}
 	}
-
-	while (1) {}
-
 }
