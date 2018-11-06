@@ -3,8 +3,6 @@
 #include <string.h>
 
 
-
-
 char pass[11] = {'.', 't', 'i', 'e', '5', 'R', 'o', 'n', 'a', 'l', '\0'};
 
 /*
@@ -47,14 +45,11 @@ void resetTimer() {
 	TR0 = 1;
 }
 
-void trainUser(unsigned int timings[]) {
-	unsigned char count = 0, charIndex = 0;
+unsigned char* calculateTimings() {
+	unsigned char charIndex = 0;
 	unsigned char localTimings[9];
-	unsigned char i;
 
-	resetTimer();
-
-	while (count < 5) {
+	while (1) {
 		char c = _getkey();
 		if (c == pass[charIndex]) {
 			stopTimer();
@@ -62,6 +57,7 @@ void trainUser(unsigned int timings[]) {
 				localTimings[charIndex - 1] = timer;
 			charIndex++;
 		} else {
+			printf("FAILED\n");
 			charIndex = 0;
 		}
 
@@ -69,19 +65,30 @@ void trainUser(unsigned int timings[]) {
 
 		// One run of correct input password
 		if (charIndex == 9) {
-			charIndex = 0;
-			for (i = 0; i < 9; i++ ) {
-				timings[i] += localTimings[i];
-			}
-			count++;
+			return localTimings;
 		}
 	}
+}
 
-	// Done 5 successful inputs, just average them.
-	for (i = 0; i < 9; i++ ) {
-		timings[i] = (timings[i] / 5);
+void trainUser(unsigned int timings[]) {
+	unsigned char count = 0;
+	unsigned char i;
+	unsigned char *currentTimings;
+
+	resetTimer();
+	while (count < 5) {
+		currentTimings = calculateTimings();
+		for (i = 0 ; i < 9 ; i++) {
+			timings[i] += currentTimings[i];
+		}
+		count ++;
+		printf("Trained -> %bu\n", count);
 	}
 
+	// Done successful <counts> of input runs, just average them.
+	for (i = 0; i < 9; i++) {
+		timings[i] = (timings[i] / count);
+	}
 }
 
 void main (void) {
