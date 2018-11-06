@@ -128,9 +128,9 @@ void main (void) {
 		testTimings = calculateTimings();
 
 		if (calculateEculidean(timingsA) < calculateEculidean(timingsB)) {
-			printf("A");
+			printf("A\n");
 		} else {
-			printf("B");
+			printf("B\n");
 		}
 	}
 }
