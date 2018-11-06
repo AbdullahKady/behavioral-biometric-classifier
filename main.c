@@ -11,6 +11,8 @@ char pass[11] = {'.', 't', 'i', 'e', '5', 'R', 'o', 'n', 'a', 'l', '\0'};
 unsigned int timingsA[9];
 unsigned int timingsB[9];
 unsigned char timer = 0; // In overflows :D (~0.06sec)
+unsigned char* testTimings; // Calculated in the main method, but used by calculateEculidean
+
 
 void init() {
 	/*------------------------------------------------
@@ -89,6 +91,27 @@ void trainUser(unsigned int timings[]) {
 	for (i = 0; i < 9; i++) {
 		timings[i] = (timings[i] / count);
 	}
+}
+
+unsigned int calculateEculidean(unsigned int timings[]) {
+	unsigned char i;
+	unsigned long summation = 0;
+
+	for (i = 0 ; i < 9 ; i++) {
+		// Much cheaper than actually importing the POW
+		summation += ((testTimings[i] - timings[i]) * (testTimings[i] - timings[i]));
+	}
+
+	/*
+		* Worst possible case is, test timing = 255, original timing = 0 ?
+		* This will lead to 255*255*9, so still safe for an unsigned long
+
+		* Hypothesis: if the summation is greater than X, then SQRT is
+	  * greater than X as well: https://i.imgflip.com/2lspgm.jpg
+	*/
+
+	return summation;
+
 }
 
 void main (void) {
