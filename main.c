@@ -115,7 +115,7 @@ unsigned int calculateEculidean(unsigned int timings[]) {
 }
 
 void main (void) {
-
+	
 	init();
 	trainUser(timingsA);
 	trainUser(timingsB);
@@ -129,8 +129,12 @@ void main (void) {
 
 		if (calculateEculidean(timingsA) < calculateEculidean(timingsB)) {
 			printf("A\n");
+			//turn on the LED */ Port1.0 */
+			P1 |= 0x01;
 		} else {
 			printf("B\n");
+			//turn off the LED */ Port1.0 */
+			P1 &= 0xFE;
 		}
 	}
 }
