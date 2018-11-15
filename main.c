@@ -32,10 +32,6 @@ void handleOverflow(void) interrupt 1
 	timer++;
 }
 
-// unsigned int readTimer () {
-// 	return (TH0 << 8) | TL0 ;
-// }
-
 void stopTimer()
 {
 	TR0 = 0;
@@ -66,7 +62,7 @@ unsigned char *calculateTimings()
 		}
 		else
 		{
-			printf("FAILED\n");
+			printf("F\n");
 			charIndex = 0;
 		}
 
@@ -95,7 +91,7 @@ void trainUser(unsigned int timings[])
 			timings[i] += currentTimings[i];
 		}
 		count++;
-		printf("Trained -> %bu\n", count);
+		printf("Trained%bu", count);
 	}
 
 	// Done successful <counts> of input runs, just average them.
@@ -127,25 +123,32 @@ unsigned int calculateEculidean(unsigned int timings[])
 	return summation;
 }
 
+void flashLED(void)
+{
+	resetTimer();
+	P1 ^= 0x01;
+	while (timer < 15);
+	P1 ^= 0x01;
+	while (timer < 30);
+}
+
 void main(void)
 {
 
 	init();
 
 	/*
-		*LED: P1.0 **on if userA, off if userB**
-	  	*Train/Test: P1.1 **on to train, off to start testing**
-	 	*UserA/B: P1.2 **on to train A, off to train B**
+		* LED: P1.0 **on if userA, off if userB**
+	  * Train/Test: P1.1 **on to train, off to start testing**
+	 	* UserA/B: P1.2 **on to train A, off to train B**
 	*/
-
 	while (1)
 	{
-		//check training/testing phase
+		// Check training/testing phase
 		if (P1 & 0x02)
 		{
-			/*
-				*training phase
-			*/
+
+			// TRAINING PHASE
 
 			//user switching
 			if (P1 & 0x04)
@@ -159,20 +162,18 @@ void main(void)
 		}
 		else
 		{
-			// testing phase
+			// TESTING PHASE
 			testTimings = calculateTimings();
-
 			if (calculateEculidean(timingsA) < calculateEculidean(timingsB))
 			{
-				printf("A\n");
-				//turn on the LED */ Port1.0 */
-				P1 |= 0x01;
+				// Turn on the LED */ Port1.0 */
+				flashLED();
 			}
 			else
 			{
-				printf("B\n");
-				//turn off the LED */ Port1.0 */
-				P1 &= 0xFE;
+				// Turn off the LED */ Port1.0 */
+				flashLED();
+				flashLED();
 			}
 		}
 	}
