@@ -64,7 +64,7 @@ Keystroke dynamics can therefore be described as a software-based algorithm that
 \subsection{Project Idea:} 
 This project is divided into two phases, traning and testing phase. \\
 
-In the training phase, the participants is asked to enter a certain word ".tie5Ronal" 5 times, then during the training the average flight time of each of the word's kets is calculated then we take the average of the 5 times and create a unique profile for each participants which will be used to verify the user in the testing phase. \\
+In the training phase, the participants is asked to enter a certain word \textbf{".tie5Ronal"} \underline{5 times}, then during the training the average flight time of each of the word's kets is calculated then we take the average of the 5 times and create a unique profile for each participants which will be used to verify the user in the testing phase. \\
 
 In the testing phase, one of the participant will be selected randomly and will be asked to enter the same passcode ".tie5Ronal", then our implementation measure the distance between the test vector and the saved profiles and identify the user's identity based on the shortest distance between the two vectors.
 
@@ -100,6 +100,41 @@ we determine the users identity by the closest vector in the saved profile.
 
 
 \subsection{Team Work}
+
+The code was divided into several steps and functions as follows:
+\begin{itemize}
+\item Serial port Setup and Initialization
+\begin{lstlisting}[style=CStyle]
+void init()
+\end{lstlisting}
+
+\item Time Setup and Calculations
+\begin{lstlisting}[style=CStyle]
+void resetTimer()
+void stopTimer()
+void handleOverflow(void) interrupt 1
+\end{lstlisting}
+
+\item Training Phase
+\begin{lstlisting}[style=CStyle]
+void trainUser(unsigned int timings[])
+\end{lstlisting}
+
+\item Similarity Calculations 
+\begin{lstlisting}[style=CStyle]
+unsigned int calculateEculidean(unsigned int timings[])
+\end{lstlisting}
+
+\item Testing Phase
+\begin{lstlisting}[style=CStyle]
+unsigned char *calculateTimings()
+void flashLED(void)
+\end{lstlisting}
+\end{itemize}
+
+
+The work was distributed among the team members equally and they worked together to combine the final functions and testing the final version of the system.
+
 
 %
 %
