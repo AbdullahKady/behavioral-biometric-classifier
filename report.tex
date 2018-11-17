@@ -1,17 +1,46 @@
 \documentclass[runningheads]{llncs}
 
 \usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
 
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},   
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=C
+}
 
 \begin{document}
 %
 \title{Behavioral Biometric Classifier on 8051 Microcontroller\thanks{Supported by CSEN 702: Microprocessors Course}}
 
-\author{Abdullah ElKady \and Mohamed Ibrahim \and Amr Kayid \and Ahmed Shawky \and Ahmed Sabek}
+\author{Abdullah Elkady \and Mohamed Ibrahim \and Amr Kayid \and Ahmed Shawky \and Ahmed Sabek}
 
 
 \institute{German University in Cairo, Egypt \\
-\email{\{abdullah.kady, mohamed.meeza, amr.kayid, ahmed.shawky, ahmed.sabek\}@guc.edu.eg}}
+\email{\{abdullah.elkady, mohamed.meeza, amr.kayid, \\
+ahmed.ahmedhussein, ahmed.sabek\}@guc.edu.eg}}
+
+\authorrunning{A. Elkady \and M. Ibrahim \and A. Kayid \and A. Shawky \and A. Sabek}
 
 \maketitle             
 
@@ -39,8 +68,50 @@ In the training phase, the participants is asked to enter a certain word ".tie5R
 
 In the testing phase, one of the participant will be selected randomly and will be asked to enter the same passcode ".tie5Ronal", then our implementation measure the distance between the test vector and the saved profiles and identify the user's identity based on the shortest distance between the two vectors.
 
+%
+%
+%
 
 \section{Implementation}
+
+\subsection{Brief Description}
+Our implementation starts with initializing and setuping the serial port for 2400 baud at 12MHz, and enabiling mode 1 (8-bit UART) to enable reciever, along with enabiling the interrupts for T0 and the global interrupts. \\
+
+After initialization phase, we continuosly checking for training and testing phases by checking on \textbf{P1}. If we are in the training phase, we check for which user profile (\textit{A or B}) will be trained. then we start the training phase for the specific user using the following functions
+
+\begin{lstlisting}[style=CStyle]
+void trainUser(unsigned int timings[])
+\end{lstlisting}
+
+This function calculate the total training time for the user in the 5 attemps,
+the function calculate the time of each keystroke usign the following function
+\begin{lstlisting}[style=CStyle]
+unsigned char *calculateTimings()
+\end{lstlisting}
+after successful 5 attemps of input runs, we average the resulting time and save it in the user's profile.
+
+
+In the testing phase, the user is selected randomly and asked to enter the same passcode,
+then we calculate the timing of the user, and using Eculidean Algorithms in the following function
+\begin{lstlisting}[style=CStyle]
+unsigned int calculateEculidean(unsigned int timings[])
+\end{lstlisting}
+we determine the users identity by the closest vector in the saved profile.
+
+
+\subsection{Team Work}
+
+%
+%
+%
+
+\section{User Guide}
+
+%
+%
+%
+
+\section{Results}
 
 
 % \paragraph{Sample Heading (Fourth Level)}
@@ -117,21 +188,21 @@ In the testing phase, one of the participant will be selected randomly and will 
 \bibitem{ref_article1}
 Ng, A.: Ubiquity symposium: MOOCs and technology to advance learning and learning research: offering verified credentials in massive open online courses. ACM
 
-\bibitem{ref_lncs1}
-Author, F., Author, S.: Title of a proceedings paper. In: Editor,
-F., Editor, S. (eds.) CONFERENCE 2016, LNCS, vol. 9999, pp. 1--13.
-Springer, Heidelberg (2016). \doi{10.10007/1234567890}
+% \bibitem{ref_lncs1}
+% Author, F., Author, S.: Title of a proceedings paper. In: Editor,
+% F., Editor, S. (eds.) CONFERENCE 2016, LNCS, vol. 9999, pp. 1--13.
+% Springer, Heidelberg (2016). \doi{10.10007/1234567890}
 
-\bibitem{ref_book1}
-Author, F., Author, S., Author, T.: Book title. 2nd edn. Publisher,
-Location (1999)
+% \bibitem{ref_book1}
+% Author, F., Author, S., Author, T.: Book title. 2nd edn. Publisher,
+% Location (1999)
 
-\bibitem{ref_proc1}
-Author, A.-B.: Contribution title. In: 9th International Proceedings
-on Proceedings, pp. 1--2. Publisher, Location (2010)
+% \bibitem{ref_proc1}
+% Author, A.-B.: Contribution title. In: 9th International Proceedings
+% on Proceedings, pp. 1--2. Publisher, Location (2010)
 
-\bibitem{ref_url1}
-LNCS Homepage, \url{http://www.springer.com/lncs}. Last accessed 4
-Oct 2017
+% \bibitem{ref_url1}
+% LNCS Homepage, \url{http://www.springer.com/lncs}. Last accessed 4
+% Oct 2017
 \end{thebibliography}
 \end{document}
