@@ -59,16 +59,16 @@ A simple behavioral biometric classifier on 8051 Microcontroller that can identi
 
 \section{Introduction}
 \subsection{behavioral biometric}
-In this project we used the behavioral biometric of Keystroke Dynamics to identify individual types characters on a keyboard or keypad. The keystroke rhythms of a user are measured to develop a unique biometric profile of the user's typing pattern for future authentication, the project idea is similar to the one that was used by Coursera~\cite{ref_article1} for verifying learners before submitting graded quizzes and assignments. \\
+In this project we used the behavioral biometric of Keystroke Dynamics to identify individual types characters on a keyboard or keypad. The keystroke rhythms of a user are measured to develop a unique biometric profile of the user's typing pattern for future authentication, the project idea is similar to the one that was used by Coursera~\cite{ref_article1} for verifying learners before submitting graded quizzes and assignments. \newline \newline \newline
 
-Keystroke dynamics can therefore be described as a software-based algorithm that measures both dwell and flight time to authenticate identity. where dwell time is the duration that a key is pressed, while flight time is the duration between keystrokes.
+Keystroke dynamics can therefore be described as a software-based algorithm that measures both dwell and flight time to authenticate identity. where dwell time is the duration that a key is pressed, while flight time is the duration between keystrokes. \newline \newline \newline \newline \newline
 
 \subsection{Project Idea:} 
 This project is divided into two phases, traning and testing phase. \\
 
 In the training phase, the participants is asked to enter a certain word \textbf{".tie5Ronal"} \underline{5 times}, then during the training the average flight time of each of the word's kets is calculated then we take the average of the 5 times and create a unique profile for each participants which will be used to verify the user in the testing phase. \\
 
-In the testing phase, one of the participant will be selected randomly and will be asked to enter the same passcode ".tie5Ronal", then our implementation measure the distance between the test vector and the saved profiles and identify the user's identity based on the shortest distance between the two vectors.
+In the testing phase, one of the participant will be selected randomly and will be asked to enter the same passcode ".tie5Ronal", then our implementation measure the distance between the test vector and the saved profiles and identify the user's identity based on the shortest distance between the two vectors. \newline \newline \newline
 
 %
 %
@@ -77,9 +77,9 @@ In the testing phase, one of the participant will be selected randomly and will 
 \section{Implementation}
 
 \subsection{Brief Description}
-Our implementation starts with initializing and setuping the serial port for 2400 baud at 12MHz, and enabiling mode 1 (8-bit UART) to enable reciever, along with enabiling the interrupts for T0 and the global interrupts. \\
+Our implementation starts with initializing and setuping the serial port for 2400 baud at 12MHz, and enabiling mode 1 (8-bit UART) to enable reciever, along with enabiling the interrupts for T0 and the global interrupts. \newline \newline 
 
-After initialization phase, we continuosly checking for training and testing phases by checking on \textbf{P1}. If we are in the training phase, we check for which user profile (\textit{A or B}) will be trained. then we start the training phase for the specific user using the following functions
+After initialization phase, we continuosly checking for training and testing phases by checking on \textbf{P1}. If we are in the training phase, we check for which user profile (\textit{A or B}) will be trained. then we start the training phase for the specific user using the following functions 
 
 \begin{lstlisting}[style=CStyle]
 void trainUser(unsigned int timings[])
@@ -90,44 +90,48 @@ the function calculate the time of each keystroke usign the following function
 \begin{lstlisting}[style=CStyle]
 unsigned char *calculateTimings()
 \end{lstlisting}
-after successful 5 attemps of input runs, we average the resulting time and save it in the user's profile.
-
+after successful 5 attemps of input runs, we average the resulting time and save it in the user's profile. \newline \newline 
 
 In the testing phase, the user is selected randomly and asked to enter the same passcode,
 then we calculate the timing of the user, and using Eculidean Algorithms in the following function
 \begin{lstlisting}[style=CStyle]
 unsigned int calculateEculidean(unsigned int timings[])
 \end{lstlisting}
-we determine the users identity by the closest vector in the saved profile.
+we determine the users identity by the closest vector in the saved profile. \newline
 
 
 \subsection{Team Work}
 
 The code was divided into several steps and functions as follows:
 \begin{itemize}
-\item Serial port Setup and Initialization
+  \setlength\itemsep{2em}
+
+\item \textbf{\textit{Serial port Setup and Initialization}}
 \begin{lstlisting}[style=CStyle]
 void init()
 \end{lstlisting}
 
-\item Time Setup and Calculations
+
+\item \textbf{\textit{Time Setup and Calculations}}
 \begin{lstlisting}[style=CStyle]
 void resetTimer()
 void stopTimer()
 void handleOverflow(void) interrupt 1
 \end{lstlisting}
 
-\item Training Phase
+
+\item \textbf{\textit{Training Phase}}
 \begin{lstlisting}[style=CStyle]
 void trainUser(unsigned int timings[])
 \end{lstlisting}
 
-\item Similarity Calculations 
+
+\item \textbf{\textit{Similarity Calculations }}
 \begin{lstlisting}[style=CStyle]
 unsigned int calculateEculidean(unsigned int timings[])
 \end{lstlisting}
 
-\item Testing Phase
+\item \textbf{\textit{Testing Phase}}
 \begin{lstlisting}[style=CStyle]
 unsigned char *calculateTimings()
 void flashLED(void)
