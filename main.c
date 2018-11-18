@@ -62,7 +62,7 @@ unsigned char *calculateTimings()
 		}
 		else
 		{
-			printf("F\n");
+			printf("F");
 			charIndex = 0;
 		}
 
@@ -91,7 +91,7 @@ void trainUser(unsigned int timings[])
 			timings[i] += currentTimings[i];
 		}
 		count++;
-		printf("Trained%bu", count);
+		printf("Trained%bu\n", count);
 	}
 
 	// Done successful <counts> of input runs, just average them.
@@ -138,7 +138,7 @@ void main(void)
 	init();
 
 	/*
-		* LED: P1.0 **on if userA, off if userB**
+		* LED: P1.0 **flash once if userA, twice if userB**
 	  * Train/Test: P1.1 **on to train, off to start testing**
 	 	* UserA/B: P1.2 **on to train A, off to train B**
 	*/
@@ -166,12 +166,12 @@ void main(void)
 			testTimings = calculateTimings();
 			if (calculateEculidean(timingsA) < calculateEculidean(timingsB))
 			{
-				// Turn on the LED */ Port1.0 */
+				//Flash the LED once */ Port1.0 */
 				flashLED();
 			}
 			else
 			{
-				// Turn off the LED */ Port1.0 */
+				// Flash the LED twice */ Port1.0 */
 				flashLED();
 				flashLED();
 			}
