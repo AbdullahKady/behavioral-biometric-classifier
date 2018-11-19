@@ -77,7 +77,7 @@ In the testing phase, one of the participant will be selected randomly and will 
 \section{Implementation}
 
 \subsection{Brief Description}
-Our implementation starts with initializing and setuping the serial port for 2400 baud at 12MHz, and enabiling mode 1 (8-bit UART) to enable reciever, along with enabiling the interrupts for T0 and the global interrupts. \newline \newline 
+Our implementation starts with initializing and setting the serial port for 2400 baud at 12MHz, and enabling mode 1 (8-bit UART) to enable receiver, along with enabling the interrupts for T0 and the global interrupts. \newline \newline 
 
 After initialization phase, we continuosly checking for training and testing phases by checking on \textbf{P1}. If we are in the training phase, we check for which user profile (\textit{A or B}) will be trained. then we start the training phase for the specific user using the following functions 
 
