@@ -68,7 +68,7 @@ This project is divided into two phases, traning and testing phase. \\
 
 In the training phase, the participants are asked to enter a certain word \textbf{".tie5Ronal"} \underline{5 times}, then during the training, the average flight time of each character in the word is calculated, taking the average of the 5 trails, a unique profile is created for each participant which will be used to verify the user in the testing phase. \\
 
-In the testing phase, one of the participant will be selected randomly and will be asked to enter the same passcode ".tie5Ronal", then our implementation measures the distance between the test vector and the saved profiles and identify the user's identity based on the shortest distance between the two vectors, using the Euclidean metric. \newline \newline \newline
+In the testing phase, one of the participant will be selected randomly and will be asked to enter the same passcode ".tie5Ronal", then our implementation measures the distance between the test vector and the saved profiles and identify the user's identity based on the shortest distance between the two vectors, using the Euclidean metric. \newline \newline
 
 %
 %
@@ -139,7 +139,10 @@ void flashLED(void)
 \end{itemize}
 
 
-The work was distributed among the team members equally and they worked together to combine the final functions and testing the final version of the system.
+The work was distributed among the team members equally and they worked together to combine the final functions and testing the final version of the system. \newline
+
+Our Implementation and source code can be found here\footnote{ \url{https://github.com/AbdullahKady/behavioral-biometric-classifier}
+}
 
 \newpage
 
@@ -179,9 +182,21 @@ After the training is done, we start the testing phase and the system is able to
 %
 %
 
-\section{Results}
+\section{Results and Future Work}
 
-Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results Results 
+Testing our implementation, we have tried it against multiple participants ($\leq$	10), and it worked perfectly for this small set of tests. \newline \newline \newline
+
+\textbf{However our implementation faces 2 aspects which can be enhanced: }
+
+\begin{itemize}
+  \setlength\itemsep{2em}
+
+\item The accuracy of measuring the average profile of a user, this has two subcategories:
+Increasing the training phase measurement count, for instance; do 10 runs instead of 5 runs, this would enhance the values of a user to be a more accurate representation of his expected typing speed.
+
+\item There’s a problem with our average being biased in case one of the entries had a relatively big weight, adding the standard deviation of the samples as a factor of calculating the average, would lead to better and more accurate results. 
+
+\end{itemize}
 
 %
 % ---- Bibliography ----
@@ -194,7 +209,7 @@ Results Results Results Results Results Results Results Results Results Results 
 %
 \begin{thebibliography}{8}
 \bibitem{ref_article1}
-Ng, A.: Ubiquity symposium: MOOCs and technology to advance learning and learning research: offering verified credentials in massive open online courses. ACM
+A. Maas, C. Heather, C. Do, R. Brandman, D. Koller, A. Ng, Ubiquity symposium: MOOCs and technology to advance learning and learning research: offering verified credentials in massive open online courses, Volume 2014, Number May (2014), Pages 1-11, ACM Digital Library
 
 \end{thebibliography}
 \end{document}
